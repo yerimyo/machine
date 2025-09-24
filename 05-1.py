@@ -30,3 +30,42 @@ print(lr.score(test_scaled, test_target))
 
 ## 설명하기 쉬운 모델과 어려운 모델
 print(lr.coef_, lr.intercept_)
+
+# 결정 트리
+from sklearn.tree import DecisionTreeClassifier
+dt = DecisionTreeClassifier(random_state=42)
+dt.fit(train_scaled, train_target)
+print(dt.score(train_scaled, train_target))
+print(dt.score(test_scaled, test_target))
+
+import matplotlib.pyplot as plt
+from sklearn.tree import plot_tree
+# plt.figure(figsize=(10,7))
+# plot_tree(dt)
+# plt.show()
+
+# plt.figure(figsize=(10,7))
+# plot_tree(dt, max_depth=1, filled=True, 
+#           feature_names=['alcohol', 'sugar', 'pH'])
+# plt.show()
+
+## 가지치기
+dt = DecisionTreeClassifier(max_depth=3, random_state=42)
+dt.fit(train_scaled, train_target)
+print(dt.score(train_scaled, train_target))
+print(dt.score(test_scaled, test_target))
+
+# plt.figure(figsize=(20,15))
+# plot_tree(dt, max_depth=3, filled=True, feature_names=['alcohol', 'sugar', 'pH'])
+# plt.show()
+
+dt = DecisionTreeClassifier(max_depth=3, random_state=42)
+dt.fit(train_input, train_target)
+print(dt.score(train_input, train_target))
+print(dt.score(test_input, test_target))
+
+# plt.figure(figsize=(20,15))
+# plot_tree(dt, max_depth=3, filled=True, feature_names=['alcohol', 'sugar', 'pH'])
+# plt.show()
+
+print(dt.feature_importances_)
