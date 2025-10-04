@@ -21,3 +21,17 @@ import numpy as np
 print(np.unique(train_target, return_counts=True))
 
 # 로지스틱 회귀로 패션 아이템 분류하기
+train_scaled = train_input / 255.0
+train_scaled = train_scaled.reshape(-1, 28*28)
+
+print(train_scaled.shape)
+
+from sklearn.model_selection import cross_validate
+from sklearn.linear_model import SGDClassifier
+
+sc = SGDClassifier(loss='log_loss', max_iter=5, random_state=42)
+scores = cross_validate(sc, train_scaled, train_target, n_jobs=-1)
+print(np.mean(scores['test_score']))
+
+# 인공 신경망
+## 텐서플로와 케라스
