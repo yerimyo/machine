@@ -33,5 +33,45 @@ sc = SGDClassifier(loss='log_loss', max_iter=5, random_state=42)
 scores = cross_validate(sc, train_scaled, train_target, n_jobs=-1)
 print(np.mean(scores['test_score']))
 
+sc = SGDClassifier(loss='log_loss', max_iter=10, random_state=42)
+scores = cross_validate(sc, train_scaled, train_target, n_jobs=-1)
+print(np.mean(scores['test_score']))
+
+sc = SGDClassifier(loss='log_loss', max_iter=20, random_state=42)
+scores = cross_validate(sc, train_scaled, train_target, n_jobs=-1)
+print(np.mean(scores['test_score']))
+
 # 인공 신경망
 ## 텐서플로와 케라스
+import tensorflow as tf
+import keras
+
+keras.config.backend()
+
+import os
+os.environ["KERA_BACKEND"] = 'torch'
+
+# 인공 신경망으로 모델 만들기
+from sklearn.model_selection import train_test_split
+
+train_scaled, val_scaled, train_target, val_target = train_test_split(
+    train_scaled, train_target, test_size=0.2, random_state=42)
+
+print(train_scaled.shape, train_target.shape)
+
+print(val_scaled.shape, val_target.shape)
+
+input = keras.layers.Input(shape=(784,))
+
+dense = keras.layers.Dense(10, activation='softmax')
+
+model = keras.Sequential([input, dense])
+
+# 인공 신경망으로 패션 아이템 분류하기
+model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+print(train_target[:10])
+
+model.fit(train_scaled, train_target, epochs=5)
+
+model.evaluate(val_scaled, val_target)
