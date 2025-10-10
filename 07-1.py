@@ -61,11 +61,11 @@ print(train_scaled.shape, train_target.shape)
 
 print(val_scaled.shape, val_target.shape)
 
-input = keras.layers.Input(shape=(784,))
+inputs = keras.layers.Input(shape=(784,))
 
 dense = keras.layers.Dense(10, activation='softmax')
 
-model = keras.Sequential([input, dense])
+model = keras.Sequential([inputs, dense])
 
 # 인공 신경망으로 패션 아이템 분류하기
 model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
