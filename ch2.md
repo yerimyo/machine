@@ -1,0 +1,4 @@
+# numpy
+seed()  
+arange()  
+shuffle()
