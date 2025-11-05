@@ -1,3 +1,6 @@
+import os
+os.environ['KERAS_BACKEND'] = 'tensorflow'
+
 # 신경망 모델 훈련
 # 손실 곡선
 import keras
@@ -97,7 +100,7 @@ model.save('model-whole.keras')
 
 model.save_weights('model.weights.h5')
 
-model =model_fn(keras.layers.Dropout(0.3))
+model = model_fn(keras.layers.Dropout(0.3))
 model.load_weights('model.weights.h5')
 
 import numpy as np
