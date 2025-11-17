@@ -31,10 +31,12 @@ model.add(keras.layers.Dense(10, activation='softmax'))
 
 model.summary()
 
-# keras.utils.plot_model(model)
+keras.utils.plot_model(model)
 
-# keras.utils.plot_model(model, show_shapes=True)
+keras.utils.plot_model(model, show_shapes=True)
 # 🔴 그래프 오류나는 거 해결
+# 터미널에 패키지설치
+# pip install pydot graphviz
 
 # 모델 컴파일과 훈련
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy',
@@ -76,4 +78,5 @@ import numpy as np
 print(classes[np.argmax(preds)])
 
 test_scaled = test_input.reshape(-1, 28, 28, 1)/255.0
+
 model.evaluate(test_scaled, test_target)
